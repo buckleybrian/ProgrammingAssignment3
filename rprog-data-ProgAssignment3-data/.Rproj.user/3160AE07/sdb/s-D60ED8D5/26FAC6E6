@@ -1,0 +1,16 @@
+{
+    "contents" : "# Lab 3 answers\n\n# Load the esoph inbuilt data set\ndata(esoph)\n?esoph\n\n# Use the colnames function to give it some more helpful column names\ncolnames(esoph) = c('Age','Alcohol','Tobacco','NoCases', 'NoControls')\n\n# Three different ways of accessing the number of cases in the 15th record.\nesoph$NoCases[15]\nesoph[15,4]\nesoph[15,'NoCases']\n\n# Create a new variable total observations\nesoph$TotalObs = esoph$NoCases + esoph$NoControls\n\n# Create a new data frame which contains only the number of cases and the number of controls columns\nesoph2 = esoph[,4:5]\n\n# Use sapply to calculate the mean, standard deviation and IQR for this new data frame\nsapply(esoph2,'mean')\nsapply(esoph2,'sd')\nsapply(esoph2,'IQR')\n\n# Using subset, find the mean ages of the online and offline students any different?\nesophLowAlc = subset(esoph, Alcohol=='0-39g/day')\nesophHighAlc = subset(esoph, Alcohol=='120+')\nmean(esophLowAlc$NoCases)\nmean(esophHighAlc$NoCases)\n\n# Take a new block of text from an Irish Times article and run the findwords function on it.\n# Not shown\n\n# Re-create the plot in slide 26 but this time with mother's weight (lwt) instead of age\nlibrary(MASS)\ndata(birthwt)\nbirthwt2 = birthwt[,-c(4,10)]\n\n# Plot of low birthwt against lwt\nmod = glm(birthwt2$low ~ birthwt2$lwt, family=binomial)$coef\nplot(jitter(birthwt2$lwt),birthwt2$low, col=\"red\")\npoints(birthwt2$lwt,1/(1+exp(-(mod[1]+mod[2]*birthwt2$lwt))),pch=2, col=\"green\")\n",
+    "created" : 1412070413936.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "3110469751",
+    "id" : "26FAC6E6",
+    "lastKnownWriteTime" : 1412070404,
+    "path" : "~/Personal/Courses/UCD Data Analytics/STAT40730 Data Prog with R/Lab3Answers.R",
+    "project_path" : null,
+    "properties" : {
+    },
+    "source_on_save" : false,
+    "type" : "r_source"
+}
